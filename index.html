@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jada Legend</title>
+  <style>
+    :root {
+      --bg: #0c111a;
+      --card: rgba(15, 23, 42, 0.96);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #f97316;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, rgba(249, 115, 22, 0.24), transparent 25%),
+        linear-gradient(180deg, #020617 0%, #0c111a 100%);
+      color: var(--text);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .card {
+      width: min(100%, 1000px);
+      padding: 36px;
+      border-radius: 32px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .hero span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.17);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      width: fit-content;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 44rem;
+      line-height: 1.75;
+      color: #d1d5db;
+    }
+
+    .info {
+      display: grid;
+      gap: 10px;
+      color: #cbd5e1;
+      font-size: 0.98rem;
+    }
+
+    .info strong {
+      color: #ffffff;
+    }
+
+    .photo-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .photo-frame {
+      width: min(100%, 340px);
+      aspect-ratio: 1 / 1;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 3px solid rgba(249, 115, 22, 0.18);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.72));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-frame .placeholder {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .upload-button {
+      width: min(100%, 340px);
+    }
+
+    .upload-button input {
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      font-size: 0.98rem;
+      cursor: pointer;
+    }
+
+    .upload-button input:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .hint {
+      max-width: 340px;
+      color: #94a3b8;
+      font-size: 0.94rem;
+      text-align: center;
+    }
+
+    @media (max-width: 840px) {
+      .card {
+        grid-template-columns: 1fr;
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        padding: 20px;
+      }
+
+      .card {
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <section class="hero">
+        <span>Jada Legend</span>
+        <h1>Make your personal page shine.</h1>
+        <p>Welcome to your custom website. Upload a photo to preview it instantly, then save this page in the same folder as your image if you want to use a fixed picture.</p>
+        <div class="info">
+          <p><strong>Name:</strong> Jada Legend</p>
+          <p><strong>About:</strong> A modern hero page built for your picture, personality, and style.</p>
+        </div>
+      </section>
+      <section class="photo-panel">
+        <div class="photo-frame" id="photoFrame">
+          <div class="placeholder">Your photo appears here after upload.</div>
+        </div>
+        <div class="upload-button">
+          <input type="file" id="imageInput" accept="image/*">
+        </div>
+        <p class="hint">Choose a JPG, PNG, or WebP file from your computer. The image will show up right here.</p>
+      </section>
+    </div>
+  </div>
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const photoFrame = document.getElementById('photoFrame');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files && this.files[0];
+      if (!file) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        photoFrame.innerHTML = '<img src="' + event.target.result + '" alt="Jada Legend photo">';
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
